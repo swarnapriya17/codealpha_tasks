@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentPulse - Enterprise HR Analytics Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-64 bg-slate-950 border-r border-slate-800 flex flex-col justify-between hidden lg:flex">
+            <div class="p-6">
+                <div class="flex items-center gap-2.5 font-bold text-xl mb-10 tracking-wide text-cyan-400">
+                    <i data-lucide="shield-alert" class="w-6 h-6 text-cyan-500"></i> TalentPulse
+                </div>
+                <nav class="space-y-1.5">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 bg-cyan-950/60 border border-cyan-800/50 text-cyan-400 rounded-xl font-medium transition">
+                        <i data-lucide="users" class="w-4 h-4"></i> Workforce Metrics
+                    </a>
+                    <a href="#recruitment-section" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-200 rounded-xl transition">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i> Recruitment Pipelines
+                    </a>
+                    <a href="#predictive-section" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-200 rounded-xl transition">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Demand Forecasting
+                    </a>
+                </nav>
+            </div>
+            <div class="p-4 border-t border-slate-900 text-[10px] uppercase tracking-wider text-slate-500 text-center">
+                CodeAlpha Final Project Task 2
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto bg-slate-900 p-6 lg:p-8">
+            <header class="md:flex justify-between items-center mb-8 pb-5 border-b border-slate-800">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-white tracking-tight">Human Resources Analytics Portal</h1>
+                    <p class="text-slate-400 text-sm mt-1">Audit operational workforce velocity, engagement trends, and predictive staffing targets.</p>
+                </div>
+                <div class="mt-4 md:mt-0 bg-slate-950 px-4 py-2 rounded-xl border border-slate-800 flex items-center gap-2 text-xs font-mono text-slate-400">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span> SYSTEM MONITOR LOGS ACTIVE
+                </div>
+            </header>
+
+            <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-1">Annual Turnover Rate</p>
+                        <h3 class="text-2xl font-black text-white">11.4%</h3>
+                        <span class="text-xs text-emerald-400 font-medium flex items-center mt-1">
+                            <i data-lucide="trending-down" class="w-3 h-3 mr-1"></i> -2.1% under market mean
+                        </span>
+                    </div>
+                    <div class="p-3 bg-slate-900 text-cyan-400 rounded-lg border border-slate-800"><i data-lucide="user-minus" class="w-5 h-5"></i></div>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-1">Average Time-to-Hire</p>
+                        <h3 class="text-2xl font-black text-white">24 Days</h3>
+                        <span class="text-xs text-amber-400 font-medium flex items-center mt-1">
+                            <i data-lucide="clock" class="w-3 h-3 mr-1"></i> Constant value vs last Q
+                        </span>
+                    </div>
+                    <div class="p-3 bg-slate-900 text-amber-400 rounded-lg border border-slate-800"><i data-lucide="calendar"></i></div>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-1">Workplace Sat Index</p>
+                        <h3 class="text-2xl font-black text-white">4.2 / 5.0</h3>
+                        <span class="text-xs text-emerald-400 font-medium flex items-center mt-1">
+                            <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +8% post-pulse survey
+                        </span>
+                    </div>
+                    <div class="p-3 bg-slate-900 text-emerald-400 rounded-lg border border-slate-800"><i data-lucide="smile"></i></div>
+                </div>
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-1">Open Requisitions</p>
+                        <h3 class="text-2xl font-black text-white">18 Roles</h3>
+                        <span class="text-xs text-cyan-400 font-medium flex items-center mt-1">
+                            4 Key engineering slots
+                        </span>
+                    </div>
+                    <div class="p-3 bg-slate-900 text-purple-400 rounded-lg border border-slate-800"><i data-lucide="briefcase"></i></div>
+                </div>
+            </section>
+
+            <section id="recruitment-section" class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+                <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 xl:col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h3 class="text-base font-bold text-white">Recruitment Pipeline Conversion Volume</h3>
+                            <p class="text-xs text-slate-500">Current active multi-tier application funnel</p>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="recruitmentFunnelChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-950 p-6 rounded-xl border border-slate-800">
+                    <h3 class="text-base font-bold text-white mb-1">Attrition Drivers Analysis</h3>
+                    <p class="text-xs text-slate-500 mb-4">Core historical indicators for voluntary exit patterns</p>
+                    <div class="h-60 flex items-center justify-center">
+                        <canvas id="attritionPieChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+                <div class="bg-slate-950 p-6 rounded-xl border border-slate-800">
+                    <h3 class="text-base font-bold text-white mb-1">Performance vs. Engagement Matrix</h3>
+                    <p class="text-xs text-slate-500 mb-4">Aggregated scoring distributions across production groups</p>
+                    <div class="h-64">
+                        <canvas id="performanceRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 xl:col-span-2">
+                    <h3 class="text-base font-bold text-white mb-1">Departmental Talent Stability Framework</h3>
+                    <p class="text-xs text-slate-500 mb-4">Quarterly human capital structural parameters</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-slate-500 text-[11px] uppercase tracking-wider font-semibold">
+                                    <th class="pb-3">Functional Unit</th>
+                                    <th class="pb-3 text-center">Headcount</th>
+                                    <th class="pb-3 text-center">Satisfaction Index</th>
+                                    <th class="pb-3 text-right">Promotability Velocity</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-xs font-mono text-slate-300 divide-y divide-slate-900">
+                                <tr class="hover:bg-slate-900/40 transition"><td class="py-3.5 font-sans font-semibold text-slate-200">Engineering & Product</td><td class="text-center font-bold text-white">142</td><td class="text-center text-emerald-400">4.4 / 5.0</td><td class="text-right text-cyan-400 font-bold">18.2%</td></tr>
+                                <tr class="hover:bg-slate-900/40 transition"><td class="py-3.5 font-sans font-semibold text-slate-200">Enterprise Sales</td><td class="text-center font-bold text-white">68</td><td class="text-center text-amber-400">3.9 / 5.0</td><td class="text-right text-cyan-400 font-bold">12.5%</td></tr>
+                                <tr class="hover:bg-slate-900/40 transition"><td class="py-3.5 font-sans font-semibold text-slate-200">Marketing & Design</td><td class="text-center font-bold text-white">35</td><td class="text-center text-emerald-400">4.1 / 5.0</td><td class="text-right text-cyan-400 font-bold">14.0%</td></tr>
+                                <tr class="hover:bg-slate-900/40 transition"><td class="py-3.5 font-sans font-semibold text-slate-200">Operations & Support</td><td class="text-center font-bold text-white">82</td><td class="text-center text-emerald-400">4.0 / 5.0</td><td class="text-right text-cyan-400 font-bold">9.2%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="predictive-section" class="bg-gradient-to-tr from-slate-950 to-slate-900 border border-slate-800 rounded-xl p-6">
+                <div class="xl:flex items-center justify-between gap-8">
+                    <div class="xl:w-1/3 mb-6 xl:mb-0">
+                        <div class="inline-flex items-center gap-1.5 text-cyan-400 text-[10px] uppercase tracking-widest font-black mb-2 px-2.5 py-1 bg-cyan-950/60 border border-cyan-800 rounded-md">
+                            <i data-lucide="cpu" class="w-3 h-3"></i> Predictive Modeling Engine
+                        </div>
+                        <h2 class="text-xl font-bold tracking-tight text-white mb-2">Hiring Needs & Scale Forecast</h2>
+                        <p class="text-slate-400 text-xs mb-6">Modify projected quarterly business expansion velocity targets to generate forward hiring demand vectors automatically.</p>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-2 flex justify-between">
+                                <span>Target Scaling Intensity</span>
+                                <span id="predictiveGrowthLabel" class="text-cyan-400 font-bold font-mono">Moderate (10%)</span>
+                            </label>
+                            <input id="predictiveGrowthRange" type="range" min="5" max="35" step="5" value="10" oninput="calculatePredictiveNeeds()" class="w-full accent-cyan-400 bg-slate-800 h-1.5 rounded-lg cursor-pointer">
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 bg-slate-950/40 p-4 rounded-xl border border-slate-850 h-64">
+                        <canvas id="predictiveHiringChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Init icon markers
+        lucide.createIcons();
+
+        // --- Chart 1: Recruitment Metrics Graph Construction ---
+        const ctxRecruit = document.getElementById('recruitmentFunnelChart').getContext('2d');
+        new Chart(ctxRecruit, {
+            type: 'bar',
+            data: {
+                labels: ['Applications Received', 'Screening Cleared', 'Technical Assessment', 'Final Executive Round', 'Offers Extended'],
+                datasets: [{
+                    label: 'Candidates Count',
+                    data: [1200, 480, 190, 65, 32],
+                    backgroundColor: 'rgba(34, 211, 238, 0.85)',
+                    hoverBackgroundColor: '#22d3ee',
+                    borderRadius: 4,
+                    barPercentage: 0.55
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 10 } } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 10 } } }
+                }
+            }
+        });
+
+        // --- Chart 2: Structural Turnover Profile Distribution ---
+        const ctxAttr = document.getElementById('attritionPieChart').getContext('2d');
+        new Chart(ctxAttr, {
+            type: 'doughnut',
+            data: {
+                labels: ['Compensation Scope', 'Career Stagnation', 'Work-Life Pressure', 'External Grab'],
+                datasets: [{
+                    data: [40, 25, 20, 15],
+                    backgroundColor: ['#22d3ee', '#38bdf8', '#fbbf24', '#f87171'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 10 } }
+                },
+                cutout: '75%'
+            }
+        });
+
+        // --- Chart 3: Performance vs Engagement Radar Chart ---
+        const ctxRadar = document.getElementById('performanceRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Work Output', 'Innovation Drive', 'Cultural Score', 'Peer Evaluation', 'Skill Alignment'],
+                datasets: [
+                    {
+                        label: 'High Performers',
+                        data: [4.8, 4.5, 4.2, 4.6, 4.7],
+                        borderColor: '#22d3ee',
+                        backgroundColor: 'rgba(34, 211, 238, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Company Average',
+                        data: [3.8, 3.6, 4.0, 3.9, 3.7],
+                        borderColor: '#64748b',
+                        backgroundColor: 'rgba(100, 116, 139, 0.05)',
+                        borderWidth: 1.5,
+                        pointRadius: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#1e293b' },
+                        grid: { color: '#1e293b' },
+                        pointLabels: { color: '#94a3b8', font: { size: 9 } },
+                        ticks: { backdropColor: 'transparent', color: '#475569', font: { size: 8 } },
+                        suggestedMin: 0,
+                        suggestedMax: 5
+                    }
+                },
+                plugins: { legend: { position: 'top', labels: { color: '#94a3b8', font: { size: 9 }, boxWidth: 12 } } }
+            }
+        });
+
+        // --- Chart 4: Interactive Recruitment Needs Forecasting Model Configuration ---
+        const ctxPredictive = document.getElementById('predictiveHiringChart').getContext('2d');
+        
+        let predictiveChart = new Chart(ctxPredictive, {
+            type: 'line',
+            data: {
+                labels: ['Q3 2026 (Proj)', 'Q4 2026 (Proj)', 'Q1 2027 (Proj)', 'Q2 2027 (Proj)'],
+                datasets: [{
+                    label: 'Required New Onboardings Count',
+                    data: [12, 16, 22, 28],
+                    borderColor: '#a78bfa',
+                    backgroundColor: 'rgba(167, 139, 250, 0.04)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#c084fc'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 10 } } },
+                    x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } }
+                }
+            }
+        });
+
+        // Predictive Engine Matrix mapping scale factors
+        function calculatePredictiveNeeds() {
+            const rangeValue = parseInt(document.getElementById('predictiveGrowthRange').value);
+            const labelNode = document.getElementById('predictiveGrowthLabel');
+            
+            // Set dynamic text updates mapping context thresholds
+            if (rangeValue <= 10) labelNode.innerText = `Moderate (${rangeValue}%)`;
+            else if (rangeValue <= 20) labelNode.innerText = `Accelerated (${rangeValue}%)`;
+            else labelNode.innerText = `Hyper-Scale (${rangeValue}%)`;
+
+            // Algorithmic progression multiplier scaling forward metrics base
+            const pipelineFactor = rangeValue / 10;
+            const updatedProjections = [
+                Math.round(12 * pipelineFactor),
+                Math.round(15 * pipelineFactor * 1.1),
+                Math.round(20 * pipelineFactor * 1.2),
+                Math.round(26 * pipelineFactor * 1.3)
+            ];
+
+            predictiveChart.data.datasets[0].data = updatedProjections;
+            predictiveChart.update();
+        }
+
+        // Run baseline update loop
+        calculatePredictiveNeeds();
+    </script>
+</body>
+</html>
