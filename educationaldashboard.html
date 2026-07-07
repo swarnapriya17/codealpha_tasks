@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMetrics - Educational Performance & Resource Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between hidden lg:flex">
+            <div class="p-5">
+                <div class="flex items-center gap-2 font-bold text-xl mb-8 tracking-wide text-amber-500">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i> EduMetrics
+                </div>
+                <nav class="space-y-2">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 bg-amber-600 text-white rounded-lg transition font-medium">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Main Analytics
+                    </a>
+                    <a href="#performance-section" onclick="switchTab('performance')" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition">
+                        <i data-lucide="award" class="w-5 h-5"></i> Student Performance
+                    </a>
+                    <a href="#resources-section" onclick="switchTab('resources')" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition">
+                        <i data-lucide="pie-chart" class="w-5 h-5"></i> Resource Allocation
+                    </a>
+                </nav>
+            </div>
+            <div class="p-4 border-t border-slate-800 text-xs text-slate-400 text-center">
+                CodeAlpha Internship Task 4
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+            <header class="sm:flex justify-between items-center mb-8 pb-4 border-b border-slate-200">
+                <div>
+                    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Education Performance & Resources</h1>
+                    <p class="text-slate-500 text-sm mt-1">Optimize institutional resource distribution and track student academic KPIs.</p>
+                </div>
+                <div class="mt-4 sm:mt-0 flex items-center gap-3">
+                    <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider hidden sm:inline" for="deptSelect">Department:</label>
+                    <select id="deptSelect" onchange="handleDepartmentChange()" class="bg-white border border-slate-200 text-slate-700 text-sm rounded-lg px-3 py-2 font-medium shadow-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <option value="all">All Departments</option>
+                        <option value="cse">Computer Science</option>
+                        <option value="ece">Electronics & Comm.</option>
+                        <option value="mech">Mechanical Eng.</option>
+                    </select>
+                </div>
+            </header>
+
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Average CGPA / Pass Rate</p>
+                        <h3 id="kpi-pass" class="text-2xl font-bold text-slate-800">84.2%</h3>
+                        <span class="text-xs text-emerald-600 font-medium flex items-center mt-1">
+                            <i data-lucide="arrow-up-right" class="w-3 h-3 mr-0.5"></i> +1.8% this semester
+                        </span>
+                    </div>
+                    <div class="p-3 bg-amber-50 text-amber-600 rounded-lg"><i data-lucide="check-square"></i></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Total Student Enrollment</p>
+                        <h3 id="kpi-students" class="text-2xl font-bold text-slate-800">1,420</h3>
+                        <span class="text-xs text-slate-500 font-medium flex items-center mt-1">
+                            Active across all branches
+                        </span>
+                    </div>
+                    <div class="p-3 bg-indigo-50 text-indigo-600 rounded-lg"><i data-lucide="users"></i></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Budget Allocation Spent</p>
+                        <h3 id="kpi-budget" class="text-2xl font-bold text-slate-800">72.5%</h3>
+                        <span class="text-xs text-amber-600 font-medium flex items-center mt-1">
+                            $240k Remaining budget
+                        </span>
+                    </div>
+                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg"><i data-lucide="dollar-sign"></i></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Resource Deficit Labs</p>
+                        <h3 id="kpi-gaps" class="text-2xl font-bold text-rose-600">3 Labs</h3>
+                        <span class="text-xs text-rose-600 font-medium flex items-center mt-1">
+                            <i data-lucide="alert-triangle" class="w-3 h-3 mr-0.5"></i> Requires immediate funding
+                        </span>
+                    </div>
+                    <div class="p-3 bg-rose-50 text-rose-600 rounded-lg"><i data-lucide="package-x"></i></div>
+                </div>
+            </section>
+
+            <div class="flex border-b border-slate-200 mb-6 font-medium text-sm">
+                <button id="tab-perf-btn" onclick="switchTab('performance')" class="px-4 py-2 border-b-2 border-amber-600 text-amber-600 font-semibold focus:outline-none">
+                    Academic Performance Metrics
+                </button>
+                <button id="tab-reso-btn" onclick="switchTab('resources')" class="px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 focus:outline-none ml-4">
+                    Resource Usage & Gaps
+                </button>
+            </div>
+
+            <div id="performance-view" class="space-y-8 block">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs lg:col-span-2">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">Grade Performance Distribution</h3>
+                        <div class="h-72">
+                            <canvas id="gradeDistributionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">Average Student Attendance</h3>
+                        <div class="h-72 flex items-center justify-center">
+                            <canvas id="attendancePieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resources-view" class="space-y-8 hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">Resource Utilization vs Allocation Gaps</h3>
+                        <div class="h-72">
+                            <canvas id="resourceUtilizationChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs">
+                        <h3 class="text-lg font-bold text-slate-900">Education Strategic Resource Gaps</h3>
+                        <p class="text-slate-400 text-xs mb-4">Identified gaps requiring immediate management approval</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3.5 bg-rose-50/60 rounded-xl border border-rose-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-rose-500"></div>
+                                    <span class="text-sm font-semibold text-slate-800">Advanced AI Lab Infrastructure</span>
+                                </div>
+                                <span class="text-xs bg-rose-200 text-rose-800 font-bold px-2 py-1 rounded-sm">Critical Gap</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3.5 bg-amber-50/60 rounded-xl border border-amber-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                                    <span class="text-sm font-semibold text-slate-800">Library Research Subscriptions</span>
+                                </div>
+                                <span class="text-xs bg-amber-200 text-amber-800 font-bold px-2 py-1 rounded-sm">Moderate Deficit</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                    <span class="text-sm font-semibold text-slate-800">E-Learning Server Bandwidth upgrade</span>
+                                </div>
+                                <span class="text-xs bg-emerald-200 text-emerald-800 font-bold px-2 py-1 rounded-sm">Optimized</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="bg-white rounded-xl border border-slate-200 shadow-xs p-6 mt-8">
+                <h3 class="text-lg font-bold text-slate-900 mb-1">Departmental Overview Data</h3>
+                <p class="text-slate-500 text-xs mb-4">Aggregated parameters driving budget planning and course layout strategies.</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-slate-400 text-xs uppercase tracking-wider">
+                                <th class="pb-3 font-semibold">Academic Stream</th>
+                                <th class="pb-3 font-semibold text-center">Faculty Ratio</th>
+                                <th class="pb-3 font-semibold text-right">Assigned Budget</th>
+                                <th class="pb-3 font-semibold text-right">Student Satisfaction</th>
+                            </tr>
+                        </thead>
+                        <tbody id="departmentTableBody" class="text-sm divide-y divide-slate-100 font-medium">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Start Global Icons Engine
+        lucide.createIcons();
+
+        // Data Structuring Layer representing state changes
+        const dashboardData = {
+            all: { pass: "84.2%", students: "1,420", budget: "72.5%", gaps: "3 Labs", grades: [320, 540, 410, 110, 40], attendance: [82, 12, 6], utilization: [85, 70, 90, 60], table: [
+                { name: "Computer Science & Engineering", ratio: "1:15", budget: "$320,000", sat: "92%" },
+                { name: "Electronics & Communication", ratio: "1:18", budget: "$240,000", sat: "86%" },
+                { name: "Mechanical Engineering", ratio: "1:20", budget: "$190,000", sat: "79%" }
+            ]},
+            cse: { pass: "89.5%", students: "600", budget: "81.0%", gaps: "1 Lab", grades: [180, 260, 130, 25, 5], attendance: [88, 10, 2], utilization: [95, 85, 92, 75], table: [
+                { name: "Computer Science & Engineering", ratio: "1:15", budget: "$320,000", sat: "92%" }
+            ]},
+            ece: { pass: "82.1%", students: "450", budget: "68.5%", gaps: "1 Lab", grades: [90, 170, 150, 35, 5], attendance: [80, 14, 6], utilization: [78, 65, 88, 55], table: [
+                { name: "Electronics & Communication", ratio: "1:18", budget: "$240,000", sat: "86%" }
+            ]},
+            mech: { pass: "78.4%", students: "370", budget: "62.0%", gaps: "1 Lab", grades: [50, 110, 130, 50, 30], attendance: [75, 15, 10], utilization: [80, 55, 90, 45], table: [
+                { name: "Mechanical Engineering", ratio: "1:20", budget: "$190,000", sat: "79%" }
+            ]}
+        };
+
+        // Charts Global Configuration Hooks
+        let gradeChart, attendanceChart, utilizationChart;
+
+        function initializeCharts() {
+            // 1. Grade Profile
+            const ctxGrade = document.getElementById('gradeDistributionChart').getContext('2d');
+            gradeChart = new Chart(ctxGrade, {
+                type: 'bar',
+                data: {
+                    labels: ['A Grade', 'B Grade', 'C Grade', 'D Grade', 'Remedial Required'],
+                    datasets: [{
+                        label: 'Number of Students',
+                        data: dashboardData.all.grades,
+                        backgroundColor: '#f59e0b',
+                        borderRadius: 6
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // 2. Attendance Status
+            const ctxAttend = document.getElementById('attendancePieChart').getContext('2d');
+            attendanceChart = new Chart(ctxAttend, {
+                type: 'doughnut',
+                data: {
+                    labels: ['> 85% Attendance', '75% - 85%', '< 75% Critical'],
+                    datasets: [{
+                        data: dashboardData.all.attendance,
+                        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // 3. Resource Utilizations
+            const ctxUtil = document.getElementById('resourceUtilizationChart').getContext('2d');
+            utilizationChart = new Chart(ctxUtil, {
+                type: 'bar',
+                data: {
+                    labels: ['Computer Labs', 'R&D Infrastructure', 'Smart Classrooms', 'Digital Library'],
+                    datasets: [{
+                        label: 'Utilization Efficiency Rate (%)',
+                        data: dashboardData.all.utilization,
+                        backgroundColor: '#4f46e5',
+                        borderRadius: 4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { max: 100 } } }
+            });
+        }
+
+        // Tab views management control flow
+        function switchTab(target) {
+            const perfView = document.getElementById('performance-view');
+            const resoView = document.getElementById('resources-view');
+            const perfBtn = document.getElementById('tab-perf-btn');
+            const resoBtn = document.getElementById('tab-reso-btn');
+
+            if (target === 'performance') {
+                perfView.classList.replace('hidden', 'block');
+                resoView.classList.replace('block', 'hidden');
+                perfBtn.className = "px-4 py-2 border-b-2 border-amber-600 text-amber-600 font-semibold focus:outline-none";
+                resoBtn.className = "px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 focus:outline-none ml-4";
+            } else {
+                perfView.classList.replace('block', 'hidden');
+                resoView.classList.replace('hidden', 'block');
+                resoBtn.className = "px-4 py-2 border-b-2 border-amber-600 text-amber-600 font-semibold focus:outline-none";
+                perfBtn.className = "px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 focus:outline-none ml-4";
+            }
+        }
+
+        // Functional filter calculation routine 
+        function handleDepartmentChange() {
+            const selection = document.getElementById('deptSelect').value;
+            const context = dashboardData[selection];
+
+            // Update UI Counters
+            document.getElementById('kpi-pass').innerText = context.pass;
+            document.getElementById('kpi-students').innerText = context.students;
+            document.getElementById('kpi-budget').innerText = context.budget;
+            document.getElementById('kpi-gaps').innerText = context.gaps;
+
+            // Render Charts Shifts
+            gradeChart.data.datasets[0].data = context.grades;
+            gradeChart.update();
+
+            attendanceChart.data.datasets[0].data = context.attendance;
+            attendanceChart.update();
+
+            utilizationChart.data.datasets[0].data = context.utilization;
+            utilizationChart.update();
+
+            // Sync Structured Tables
+            renderTableData(context.table);
+        }
+
+        function renderTableData(items) {
+            const body = document.getElementById('departmentTableBody');
+            body.innerHTML = "";
+            items.forEach(row => {
+                body.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="py-3.5 text-slate-900">${row.name}</td>
+                        <td class="py-3.5 text-center text-slate-600 font-mono">${row.ratio}</td>
+                        <td class="py-3.5 text-right text-slate-700 font-mono">${row.budget}</td>
+                        <td class="py-3.5 text-right text-emerald-600">${row.sat}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Initialization Triggers
+        window.onload = function() {
+            initializeCharts();
+            renderTableData(dashboardData.all.table);
+        };
+    </script>
+</body>
+</html>
